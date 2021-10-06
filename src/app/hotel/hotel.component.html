@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="col-9">
+            <h1>Listes des hotels</h1>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter un hotel</button>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Ville</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Etoiles</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let hotel of hotels">
+                <th scope="row">{{hotel.id}}</th>
+                <td class="col-2">{{hotel.nom}}</td>
+                <td class="col-3">{{hotel.adresse}}</td>
+                <td class="col-2">{{hotel.ville}}</td>
+                <td class="col-2">{{hotel.telephone}}</td>
+                <td class="col-1">{{hotel.etoiles}}</td>
+                <td class="col-2">
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getHotelById(hotel.id)">Update</button>
+                    <button class="btn btn-danger" (click)="deleteHotelById(hotel.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+  
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un hotel</h5>
+                    <button type="button" #closeModal class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (submit)="submit()">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" name="nom" id="nom" aria-describedby="nom" placeholder="Nom de l'hôtel" [(ngModel)]="hotel.nom">
+                        </div>
+                        <div class="mb-3">
+                            <label for="etoiles" class="form-label">Nombres d'étoiles</label>
+                            <input type="number" class="form-control" name="etoiles" id="etoiles" aria-describedby="etoiles" placeholder="Nombre d'étoiles'" [(ngModel)]="hotel.etoiles">
+                        </div>
+                        <div class="mb-3">
+                            <label for="adresse" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" name="adresse" id="adresse" aria-describedby="adresse" placeholder="Adresse de l'hôtel" [(ngModel)]="hotel.adresse">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telephone" class="form-label">Telephone</label>
+                            <input type="text" class="form-control" name="telephone" id="telephone" aria-describedby="telephone" placeholder="Telephone de l'hôtel" [(ngModel)]="hotel.telephone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="email" placeholder="Email de l'hôtel" [(ngModel)]="hotel.email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ville" class="form-label">Ville</label>
+                            <input type="text" class="form-control" name="ville" id="ville" aria-describedby="ville" placeholder="Ville de l'hôtel" [(ngModel)]="hotel.ville">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

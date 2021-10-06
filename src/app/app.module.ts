@@ -8,13 +8,15 @@ import { FooterComponent } from './footer/footer.component';
 import { ClientComponent } from './client/client.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HotelComponent } from './hotel/hotel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ClientComponent
+    ClientComponent,
+    HotelComponent
   ],
   imports: [
     BrowserModule,
