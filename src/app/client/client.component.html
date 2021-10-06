@@ -1,4 +1,13 @@
 <div class="container">
+    <div class="row">
+        <div class="col-9">
+            <h1> Liste des clients</h1>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter un client</button>
+        </div>
+    </div>
+    
     <table class="table">
         <thead>
             <tr>
@@ -24,4 +33,40 @@
             </tr>
         </tbody>
   </table>
+
+  <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter un patient</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form (submit)="submit()">
+                <div class="mb-3">
+                    <label for="nomComplet" class="form-label">Nom complet</label>
+                    <input type="text" class="form-control" id="nomComplet" name="nomComplet" aria-describedby="nomComplet" placeholder="Votre nom complet" [(ngModel)]="client.nomComplet">
+                </div>
+                <div class="mb-3">
+                    <label for="telephone" class="form-label">Telephone</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Votre telephone" [(ngModel)]="client.telephone">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="email" placeholder="Votre email" [(ngModel)]="client.email">
+                </div>
+                <div class="mb-3">
+                    <label for="adresse" class="form-label">Adresse</label>
+                    <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Votre adresse" [(ngModel)]="client.adresse">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

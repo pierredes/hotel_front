@@ -5,7 +5,7 @@ export class Client {
     public email : string | undefined;
     public adresse : string | undefined;
 
-    constructor(id : number | undefined, nomComplet : string | undefined, telephone : string | undefined, email : string | undefined, adresse : string | undefined) {
+    constructor(id? : number | undefined, nomComplet? : string | undefined, telephone? : string | undefined, email? : string | undefined, adresse? : string | undefined) {
         this.id = id;
         this.nomComplet = nomComplet;
         this.telephone = telephone;

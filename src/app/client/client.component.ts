@@ -14,6 +14,7 @@ export class ClientComponent implements OnInit {
  
     
   clients : Array<Client> = [];
+  client : Client = new Client();
 
   constructor(private htpp : HttpClient) { }
 
@@ -24,7 +25,17 @@ export class ClientComponent implements OnInit {
         this.clients = data;
       }
     )
-    
+  }
+
+  submit() : void {
+    this.htpp.post<Client>(environment.base_url + "client/", this.client, httpOption).subscribe (
+      data => {
+        console.log(data);
+      },
+      Erreur => {
+        console.log(Erreur)
+      }
+    )
   }
 
 }
