@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom complet</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody >
+            <tr *ngFor="let client of clients">
+                <th scope="row">1</th>
+                <td class="col-3">{{client.nomComplet}}</td>
+                <td class="col-2">{{client.telephone}}</td>
+                <td class="col-2">{{client.email}}</td>
+                <td class="col-3">{{client.adresse}}</td>
+                <th class="col-2">
+                    <button class="btn btn-secondary mr-2">Update</button>
+                    <button class="btn btn-danger ml-3">Delete</button>
+                </th>
+            </tr>
+        </tbody>
+  </table>
+</div>
