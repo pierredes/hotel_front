@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Client } from '../classe/client';
 import { httpOption } from '../variables';
 import { environment } from 'src/environments/environment';
+import { ClientService } from '../service/client.service';
 
 @Component({
   selector: 'app-client',
@@ -15,11 +16,15 @@ export class ClientComponent implements OnInit {
     
   clients : Array<Client> = [];
   client : Client = new Client();
-
-  constructor(private htpp : HttpClient) { }
+  @ViewChild('closemodal') closemodal : ElementRef | undefined;
+  constructor(private cs : ClientService) { }
 
   ngOnInit(): void {
-    this.htpp.get<Client[]>(  environment.base_url +"client/", httpOption ).subscribe(
+    this.getAllClient();
+  }
+
+  getAllClient() : void {
+    this.cs.getAllClient().subscribe(
       data => {
         console.log(data)
         this.clients = data;
@@ -28,12 +33,52 @@ export class ClientComponent implements OnInit {
   }
 
   submit() : void {
-    this.htpp.post<Client>(environment.base_url + "client/", this.client, httpOption).subscribe (
+    if(this.client.id == undefined) {
+      this.cs.addClient(this.client).subscribe (
+        data => {
+          console.log(data);
+          this.closemodal?.nativeElement.click();
+          this.getAllClient();
+        },
+        Erreur => {
+          console.log(Erreur)
+        }
+      )
+    } else {
+      this.cs.updateClient(this.client.id, this.client).subscribe(
+        data => {
+          console.log(data);
+          this.closemodal?.nativeElement.click();
+          this.getAllClient();
+        },
+        Erreur => {
+          console.log(Erreur)
+        }
+      )
+    }
+    
+  }
+
+  getClientById(id : number | undefined) : void {
+    this.cs.getClientById(id).subscribe(
+      data => {
+        this.client = data;
+      },
+      erreur => {
+        console.log(erreur)
+      }
+    )
+  }
+
+  deleteClient(id : number | undefined) : void {
+    this.cs.deleteClientById(id).subscribe(
       data => {
         console.log(data);
+        console.log("ok");
+        this.getAllClient();
       },
-      Erreur => {
-        console.log(Erreur)
+      erreur => {
+        console.log(erreur)
       }
     )
   }

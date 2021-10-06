@@ -21,14 +21,14 @@
         </thead>
         <tbody >
             <tr *ngFor="let client of clients">
-                <th scope="row">1</th>
+                <th scope="row">{{client.id}}</th>
                 <td class="col-3">{{client.nomComplet}}</td>
                 <td class="col-2">{{client.telephone}}</td>
                 <td class="col-2">{{client.email}}</td>
                 <td class="col-3">{{client.adresse}}</td>
                 <th class="col-2">
-                    <button class="btn btn-secondary mr-2">Update</button>
-                    <button class="btn btn-danger ml-3">Delete</button>
+                    <button class="btn btn-secondary mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getClientById(client.id)">Update</button>
+                    <button class="btn btn-danger ml-3" (click)="deleteClient(client.id)">Delete</button>
                 </th>
             </tr>
         </tbody>
@@ -43,7 +43,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Ajouter un patient</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" #closemodal class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <form (submit)="submit()">
