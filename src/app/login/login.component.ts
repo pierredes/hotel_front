@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from '../service/admin.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AdminService } from '../service/admin.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private ls : AdminService) { }
+  constructor(private ls : AdminService, private router : Router) { }
 
   admin = {
     username : "",
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
       data => {
         console.log(data)
         sessionStorage.setItem("connecter", data)
+        this.router.navigate(['/client'])
       },
       erreur => {
         console.log(erreur)
