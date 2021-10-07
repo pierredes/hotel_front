@@ -12,7 +12,8 @@ import { HotelComponent } from './hotel/hotel.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
-import { ReservationComponent } from './reservation/reservation.component'; // a plugin!
+import { ReservationComponent } from './reservation/reservation.component';
+import { LoginComponent } from './login/login.component'; // a plugin!
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -26,7 +27,8 @@ FullCalendarModule.registerPlugins([
     FooterComponent,
     ClientComponent,
     HotelComponent,
-    ReservationComponent
+    ReservationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

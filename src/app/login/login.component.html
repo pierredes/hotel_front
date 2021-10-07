@@ -1,0 +1,18 @@
+<div class="container">
+
+  <h1 >Veuillez vous connecter </h1>
+  <form action="/login" method="post" (submit)=login()>
+      <div class="col-12">
+          <label for="email" class="form-label">Email / username :</label>
+          <input type="text" class="form-control" name="username" id="email" placeholder="Entrez votre email" aria-label="Entrez votre email" [(ngModel)]="admin.username">
+      </div>
+      <div class="col-12">
+          <label for="password" class="form-label">Mot de passe :</label>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Entrez votre mot de passe" aria-label="Entrez votre mot de passe" [(ngModel)]="admin.password">
+      </div>
+      <div class="col-2">
+          <button type="submit" class="btn btn-primary mt-4" id="envoyer_login">Envoyer</button>
+      </div>
+  </form>
+
+</div>
