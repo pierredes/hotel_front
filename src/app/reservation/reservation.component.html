@@ -1,0 +1,113 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-9">
+            <h1>Liste des réservations</h1>
+        </div>
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter une réservation</button>
+        </div>
+    </div>
+
+    <div>
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+
+<!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ajouter une réservation</h5>
+          <button type="button" #closeModal class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (submit)="submit()">
+            <div class="mb-3">
+              <label for="dateDebut" class="form-label">Numéro de chambre</label>
+              <input type="datetime-local" class="form-control" name="dateDebut" id="dateDebut" aria-describedby="dateDebut" placeholder="Votre date d'arrivé" [(ngModel)]="reservation.dateDebut">
+            </div>
+            <div class="mb-3">
+              <label for="dateFin" class="form-label">Numéro de chambre</label>
+              <input type="datetime-local" class="form-control" name="dateFin" id="dateFin" aria-describedby="dateFin" placeholder="Votre date de départ" [(ngModel)]="reservation.dateFin">
+            </div>
+            <div class="mb-3">
+              <label for="numeroChambre" class="form-label">Numéro de chambre</label>
+              <input type="number" class="form-control" name="numeroChambre" id="numeroChambre" aria-describedby="numeroChambre" placeholder="Votre numéro de chambre" [(ngModel)]="reservation.numeroChambre">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Client</label>
+              <select name="client" class="form-select" aria-label="Client" [(ngModel)]="reservation.client">
+                <option *ngFor="let client of clients" [ngValue]="client">{{client.nomComplet}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Hotel</label>
+              <select name="hotel" class="form-select" aria-label="Hotel" [(ngModel)]="reservation.hotel">
+                <option *ngFor="let hotel of hotels" [ngValue]="hotel">{{hotel.nom}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal" (click) = "hide()">&times;</button>
+        </div>
+
+        <div class="modal-body">
+          <form (submit)="submit()">
+            <div class="mb-3">
+              <label for="dateDebut" class="form-label">Numéro de chambre</label>
+              <input type="datetime-local" class="form-control" name="dateDebut" id="dateDebut" aria-describedby="dateDebut" placeholder="Votre date d'arrivé" [(ngModel)]="reservation.dateDebut">
+            </div>
+            <div class="mb-3">
+              <label for="dateFin" class="form-label">Numéro de chambre</label>
+              <input type="datetime-local" class="form-control" name="dateFin" id="dateFin" aria-describedby="dateFin" placeholder="Votre date de départ" [(ngModel)]="reservation.dateFin">
+            </div>
+            <div class="mb-3">
+              <label for="numeroChambre" class="form-label">Numéro de chambre</label>
+              <input type="number" class="form-control" name="numeroChambre" id="numeroChambre" aria-describedby="numeroChambre" placeholder="Votre numéro de chambre" [(ngModel)]="reservation.numeroChambre">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Client</label>
+              <select name="client" class="form-select" [compareWith]="compareClient" aria-label="Client" [(ngModel)]="reservation.client">
+                <option *ngFor="let client of clients" [ngValue]="client">{{client.nomComplet}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Hotel</label>
+              <select name="hotel" class="form-select" [compareWith]="compareHotel" aria-label="Hotel" [(ngModel)]="reservation.hotel">
+                <option *ngFor="let hotel of hotels" [ngValue]="hotel">{{hotel.nom}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+         </div>
+
+        <!-- Modal body -->
+        <div class="modal-footer">
+         <button class="btn btn-danger" id="deletereservation">supprimer</button>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -9,6 +9,15 @@ import { ClientComponent } from './client/client.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HotelComponent } from './hotel/hotel.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction';
+import { ReservationComponent } from './reservation/reservation.component'; // a plugin!
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -16,13 +25,15 @@ import { HotelComponent } from './hotel/hotel.component';
     HeaderComponent,
     FooterComponent,
     ClientComponent,
-    HotelComponent
+    HotelComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
