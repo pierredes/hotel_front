@@ -22,21 +22,17 @@ export class ReservationComponent implements OnInit {
   reservations : Array<Reservation> = []
   clients : Array<Client> = [];
   hotels : Array<Hotel> = [];
+  search : string | undefined = "";
   @ViewChild('closeModal') closeModal : ElementRef<HTMLElement> | undefined
   @ViewChild('deletereservation') deletereservation : ElementRef | undefined
 
   calendarOptions : CalendarOptions = {
     initialView : "dayGridMonth",
-    //dateClick: this.handleDateClick.bind(this),
-    // eventClick:function test(arg){
-    //   console.log(arg.event.title)
-    //   console.log(arg.event.id)
-    // },
-    eventClick: this.deleteReservationById.bind(this),
+    eventClick: this.showModalOptionsCalendar.bind(this),
 
   }
 
-  deleteReservationById(clickInfo: EventClickArg) {
+  showModalOptionsCalendar(clickInfo: EventClickArg) {
     this.showModal = true;
     this.getReservationById(clickInfo.event.id);
     document.getElementById('deletereservation')?.addEventListener("click", () => {
@@ -67,11 +63,15 @@ export class ReservationComponent implements OnInit {
 
   getAllReservation() : void {
     let tableau:  { title: string | undefined; start: Date | undefined, end: Date | undefined }[] = [];
-    this.rs.getAllReservation().subscribe(
+    this.rs.getAllReservation(this.search).subscribe(
       data => {
         this.reservations = data;
         for(let datas of data) {
-          let tableau_calendar = { id: datas.id, title: datas.client?.nomComplet, start: datas.dateDebut, end: datas.dateFin }
+          let tableau_calendar = {
+            id: datas.id,
+            title: "Réservation au nom de : " + datas.client?.nomComplet + " hotel : " + datas.hotel?.nom + " chambre numéro : " + datas.numeroChambre,
+            start: datas.dateDebut,
+            end: datas.dateFin }
           tableau.push(tableau_calendar);
         }
           this.calendarOptions.events = tableau;

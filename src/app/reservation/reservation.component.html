@@ -1,5 +1,4 @@
 <div class="container">
-
     <div class="row">
         <div class="col-9">
             <h1>Liste des réservations</h1>
@@ -8,7 +7,24 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter une réservation</button>
         </div>
     </div>
+    <div class="mb-3">
+      <form (submit)="getAllReservation()" class="row">
+        <div class="col-2">
+          <label class="form-label">Rechercher</label>
+        </div>
+        <div class="col-3">
+          <select name="client" class="form-select" aria-label="Client" [(ngModel)]="search">
+            <option *ngFor="let client of clients" [ngValue]="client.nomComplet">{{client.nomComplet}}</option>
+            <option value="">Tous les clients</option>
+        </select>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary">Rechercher</button>
+        </div>
+      </form>
 
+
+    </div>
     <div>
         <full-calendar [options]="calendarOptions"></full-calendar>
     </div>

@@ -12,8 +12,8 @@ export class ReservationService {
 
   constructor(private http : HttpClient) { }
 
-  getAllReservation() : Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(environment.base_url + "reservation/", httpOption);
+  getAllReservation(search : String | undefined) : Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(environment.base_url + "reservation/?search=" + search, httpOption);
   }
 
   getReservationById(id : string | undefined) : Observable<Reservation> {
