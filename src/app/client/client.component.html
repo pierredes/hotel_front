@@ -1,4 +1,6 @@
 <div class="container">
+  <div *ngIf="success == true" class="alert alert-success" role="alert">Opération réussite</div>
+  <div *ngIf="error == true"  class="alert alert-danger" role="alert">Opération échoué</div>
     <div class="row">
         <div class="col-9">
             <h1> Liste des clients</h1>
@@ -7,7 +9,7 @@
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter un client</button>
         </div>
     </div>
-    
+
     <table class="table">
         <thead>
             <tr>
@@ -36,7 +38,7 @@
 
   <!-- Button trigger modal -->
 
-  
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -50,21 +52,26 @@
                 <div class="mb-3">
                     <label for="nomComplet" class="form-label">Nom complet</label>
                     <input type="text" class="form-control" id="nomComplet" name="nomComplet" aria-describedby="nomComplet" placeholder="Votre nom complet" [(ngModel)]="client.nomComplet">
+                    <div *ngIf="erreur?.nomComplet != undefined"  class="alert alert-danger" role="alert">{{erreur.nomComplet}}</div>
                 </div>
                 <div class="mb-3">
                     <label for="telephone" class="form-label">Telephone</label>
                     <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Votre telephone" [(ngModel)]="client.telephone">
+                    <div *ngIf="erreur?.telephone != undefined"  class="alert alert-danger" role="alert">{{erreur.telephone}}</div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" aria-describedby="email" placeholder="Votre email" [(ngModel)]="client.email">
+                    <div *ngIf="erreur?.email != undefined"  class="alert alert-danger" role="alert">{{erreur.email}}</div>
                 </div>
                 <div class="mb-3">
                     <label for="adresse" class="form-label">Adresse</label>
                     <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Votre adresse" [(ngModel)]="client.adresse">
+                    <div *ngIf="erreur?.adresse != undefined"  class="alert alert-danger" role="alert">{{erreur.adresse}}</div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+
         </div>
       </div>
     </div>

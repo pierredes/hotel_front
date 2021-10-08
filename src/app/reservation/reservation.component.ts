@@ -1,7 +1,5 @@
-import { AfterContentInit, AfterViewInit, Component, DoCheck, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CalendarOptions, EventClickArg, EventInput, EventSourceInput } from '@fullcalendar/angular';
-import { Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { CalendarOptions, EventClickArg } from '@fullcalendar/angular';
 import { Client } from '../classe/client';
 import { Hotel } from '../classe/hotel';
 import { Reservation } from '../classe/reservation';
@@ -17,6 +15,8 @@ import { ReservationService } from '../service/reservation.service';
 })
 export class ReservationComponent implements OnInit {
 
+  success : boolean = false;
+  error : boolean = false;
   showModal: boolean = false;
   reservation : Reservation = new Reservation();
   reservations : Array<Reservation> = []
@@ -28,8 +28,16 @@ export class ReservationComponent implements OnInit {
 
   calendarOptions : CalendarOptions = {
     initialView : "dayGridMonth",
-    eventClick: this.showModalOptionsCalendar.bind(this),
+    eventClick: this.showModalOptionsCalendar.bind(this)
 
+  }
+
+  constructor(private rs : ReservationService, private cs : ClientService, private hs : HotelService) { }
+
+  ngOnInit(): void {
+    this.getAllReservation();
+    this.getAllClient();
+    this.getAllHotel();
   }
 
   showModalOptionsCalendar(clickInfo: EventClickArg) {
@@ -39,26 +47,20 @@ export class ReservationComponent implements OnInit {
       if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
         console.log(clickInfo.event.id)
         this.rs.deleteReservationById(clickInfo.event.id).subscribe(
-          data=> {
-            console.log("ok");
+          data => {
             this.getAllReservation();
+            this.showModal = false;
+            this.success = true;
+            this.error = false;
           },
           erreur => {
-            console.log(erreur)
+            console.log(erreur);
+            this.error = true;
+            this.success = false;
           }
         )
       }
     })
-  }
-
-
-
-  constructor(private rs : ReservationService, private cs : ClientService, private hs : HotelService) { }
-
-  ngOnInit(): void {
-    this.getAllReservation();
-    this.getAllClient();
-    this.getAllHotel();
   }
 
   getAllReservation() : void {
@@ -71,13 +73,18 @@ export class ReservationComponent implements OnInit {
             id: datas.id,
             title: "Réservation au nom de : " + datas.client?.nomComplet + " hotel : " + datas.hotel?.nom + " chambre numéro : " + datas.numeroChambre,
             start: datas.dateDebut,
-            end: datas.dateFin }
+            end: datas.dateFin,
+          }
+
           tableau.push(tableau_calendar);
         }
+
           this.calendarOptions.events = tableau;
       },
       erreur => {
-        console.log(erreur)
+        console.log(erreur);
+        this.error = true;
+        this.success = false;
       }
     )
   }
@@ -110,9 +117,13 @@ export class ReservationComponent implements OnInit {
         data => {
           this.getAllReservation();
           this.closeModal?.nativeElement.click();
+          this.success = true;
+          this.error = false;
         },
         erreur => {
-          console.log(erreur)
+          console.log(erreur);
+          this.error = true;
+          this.success = false;
         }
       )
     }
@@ -120,9 +131,14 @@ export class ReservationComponent implements OnInit {
       this.rs.updateReservation(this.reservation.id ,this.reservation).subscribe(
         data => {
           this.getAllReservation();
+          this.showModal = false;
+          this.success = true;
+          this.error = false;
         },
         erreur => {
           console.log(erreur)
+          this.error = true;
+          this.success = false;
         }
       )
     }
@@ -148,11 +164,15 @@ export class ReservationComponent implements OnInit {
 
   compareClient(c1: Client, c2: Client): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
-}
+  }
 
-compareHotel(c1: Hotel, c2: Hotel): boolean {
-  return c1 && c2 ? c1.id === c2.id : c1 === c2;
-}
+  compareHotel(c1: Hotel, c2: Hotel): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  // goToDate(date : Date | undefined) : Date | undefined {
+  //   return this.calendarOptions.initialDate = date;
+  // }
 
 
 }

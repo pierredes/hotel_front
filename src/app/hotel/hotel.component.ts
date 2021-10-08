@@ -10,6 +10,9 @@ import { HotelService } from '../service/hotel.service';
 
 export class HotelComponent implements OnInit {
 
+  erreur: any;
+  success : boolean = false;
+  error : boolean = false;
   hotels : Array<Hotel> = [];
   hotel : Hotel = new Hotel();
   @ViewChild('closeModal') closeModal : ElementRef | undefined;
@@ -34,9 +37,11 @@ export class HotelComponent implements OnInit {
         data => {
           this.closeModal?.nativeElement.click();
           this.getAllHotel();
+          this.success = true;
+          this.error = false;
         },
         erreur => {
-          console.log(erreur)
+          this.erreur = erreur.error;
         }
       )
     } else {
@@ -44,13 +49,15 @@ export class HotelComponent implements OnInit {
         data => {
           this.closeModal?.nativeElement.click();
           this.getAllHotel();
+          this.success = true;
+          this.error = false;
         },
         erreur => {
-          console.log(erreur)
+          this.erreur = erreur.error;
         }
       )
     }
-    
+
   }
 
   getHotelById(id : number | undefined) : void {
@@ -67,11 +74,14 @@ export class HotelComponent implements OnInit {
   deleteHotelById(id : number | undefined) : void {
     this.hs.deleteHotelById(id).subscribe(
       data => {
-        console.log(data);
         this.getAllHotel();
+        this.success = true;
+        this.error = false;
       },
       erreur => {
         console.log(erreur);
+        this.error = true;
+        this.success = false;
       }
     )
   }

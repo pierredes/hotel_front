@@ -1,4 +1,6 @@
 <div class="container">
+  <div *ngIf="success == true" class="alert alert-success" role="alert">Opération réussite</div>
+  <div *ngIf="error == true"  class="alert alert-danger" role="alert">Opération échoué</div>
     <div class="row">
         <div class="col-9">
             <h1>Liste des réservations</h1>

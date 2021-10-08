@@ -11,9 +11,10 @@ import { ClientService } from '../service/client.service';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
- 
- 
-    
+
+  erreur : any;
+  success : boolean = false;
+  error : boolean = false;
   clients : Array<Client> = [];
   client : Client = new Client();
   @ViewChild('closemodal') closemodal : ElementRef | undefined;
@@ -36,27 +37,30 @@ export class ClientComponent implements OnInit {
     if(this.client.id == undefined) {
       this.cs.addClient(this.client).subscribe (
         data => {
-          console.log(data);
           this.closemodal?.nativeElement.click();
           this.getAllClient();
+          this.success = true;
+          this.error = false;
+          this.erreur = "";
         },
-        Erreur => {
-          console.log(Erreur)
+        erreur => {
+          this.erreur = erreur.error;
         }
       )
     } else {
       this.cs.updateClient(this.client.id, this.client).subscribe(
         data => {
-          console.log(data);
           this.closemodal?.nativeElement.click();
           this.getAllClient();
+          this.success = true;
+          this.error = false;
         },
-        Erreur => {
-          console.log(Erreur)
+        erreur => {
+          this.erreur = erreur.error;
         }
       )
     }
-    
+
   }
 
   getClientById(id : number | undefined) : void {
@@ -73,12 +77,14 @@ export class ClientComponent implements OnInit {
   deleteClient(id : number | undefined) : void {
     this.cs.deleteClientById(id).subscribe(
       data => {
-        console.log(data);
-        console.log("ok");
         this.getAllClient();
+        this.success = true;
+        this.error = false;
       },
       erreur => {
-        console.log(erreur)
+        console.log(erreur);
+        this.success = false;
+        this.error = true;
       }
     )
   }
