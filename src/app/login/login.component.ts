@@ -22,9 +22,9 @@ export class LoginComponent implements OnInit {
   login() : void {
     this.ls.login(this.admin).subscribe(
       data => {
-        console.log(data)
-        sessionStorage.setItem("connecter", data)
-        this.router.navigate(['/client'])
+        console.log(data.username)
+        sessionStorage.setItem("connecter", data.username)
+        this.router.navigate(['client'])
       },
       erreur => {
         console.log(erreur)

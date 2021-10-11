@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  username : string | null =""
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('connecter')) {
+      this.username = sessionStorage.getItem('connecter')
+    }
+  }
+
+  isConnected() : boolean {
+    if (sessionStorage.getItem('connecter')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  deconnexion() : void {
+    sessionStorage.clear();
+    this.router.navigate(['login'])
   }
 
 }

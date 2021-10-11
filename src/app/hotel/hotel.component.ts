@@ -39,6 +39,9 @@ export class HotelComponent implements OnInit {
           this.getAllHotel();
           this.success = true;
           this.error = false;
+          setTimeout(() => {
+            this.success = false;
+          }, 5000);
         },
         erreur => {
           this.erreur = erreur.error;
@@ -51,6 +54,9 @@ export class HotelComponent implements OnInit {
           this.getAllHotel();
           this.success = true;
           this.error = false;
+          setTimeout(() => {
+            this.success = false;
+          }, 5000);
         },
         erreur => {
           this.erreur = erreur.error;
@@ -77,11 +83,17 @@ export class HotelComponent implements OnInit {
         this.getAllHotel();
         this.success = true;
         this.error = false;
+        setTimeout(() => {
+          this.success = false;
+        }, 5000);
       },
       erreur => {
         console.log(erreur);
         this.error = true;
         this.success = false;
+        setTimeout(() => {
+          this.error = false;
+        }, 5000);
       }
     )
   }

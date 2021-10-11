@@ -1,20 +1,26 @@
-<header>
+<header *ngIf="isConnected() == true">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="client">Client</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="hotel">Hotel</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="reservation">Réservation</a>
-              </li>
-            </ul>
-        </div>
-      </nav>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['client']">Client</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['hotel']">Hotel</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['reservation']">Réservation</a>
+            </li>
+            <li class="nav-item float-end">
+              <a class="nav-link" (click)="deconnexion()"> Déconnexion</a>
+            </li>
+          </ul>
+          <div class="float-end">
+            bonjour {{username}}
+          </div>
+      </div>
+  </nav>
 </header>

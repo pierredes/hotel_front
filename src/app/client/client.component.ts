@@ -42,6 +42,9 @@ export class ClientComponent implements OnInit {
           this.success = true;
           this.error = false;
           this.erreur = "";
+          setTimeout(() => {
+            this.success = false;
+          }, 5000);
         },
         erreur => {
           this.erreur = erreur.error;
@@ -54,6 +57,9 @@ export class ClientComponent implements OnInit {
           this.getAllClient();
           this.success = true;
           this.error = false;
+          setTimeout(() => {
+            this.success = false;
+          }, 5000);
         },
         erreur => {
           this.erreur = erreur.error;
@@ -80,11 +86,17 @@ export class ClientComponent implements OnInit {
         this.getAllClient();
         this.success = true;
         this.error = false;
+        setTimeout(() => {
+          this.success = false;
+        }, 5000);
       },
       erreur => {
         console.log(erreur);
         this.success = false;
         this.error = true;
+        setTimeout(() => {
+          this.error = false;
+        }, 5000);
       }
     )
   }

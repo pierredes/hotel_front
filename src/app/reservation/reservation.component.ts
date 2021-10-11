@@ -44,22 +44,22 @@ export class ReservationComponent implements OnInit {
     this.showModal = true;
     this.getReservationById(clickInfo.event.id);
     document.getElementById('deletereservation')?.addEventListener("click", () => {
-      if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-        console.log(clickInfo.event.id)
         this.rs.deleteReservationById(clickInfo.event.id).subscribe(
           data => {
             this.getAllReservation();
             this.showModal = false;
             this.success = true;
             this.error = false;
+            this.reservation = new Reservation();
+            setTimeout(() => {
+              this.success = false;
+            }, 5000);
           },
           erreur => {
-            console.log(erreur);
             this.error = true;
             this.success = false;
           }
         )
-      }
     })
   }
 
@@ -75,10 +75,8 @@ export class ReservationComponent implements OnInit {
             start: datas.dateDebut,
             end: datas.dateFin,
           }
-
           tableau.push(tableau_calendar);
         }
-
           this.calendarOptions.events = tableau;
       },
       erreur => {
@@ -134,6 +132,7 @@ export class ReservationComponent implements OnInit {
           this.showModal = false;
           this.success = true;
           this.error = false;
+          this.reservation = new Reservation();
         },
         erreur => {
           console.log(erreur)
