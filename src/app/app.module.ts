@@ -11,13 +11,18 @@ import { FormsModule } from '@angular/forms';
 import { HotelComponent } from './hotel/hotel.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ReservationComponent } from './reservation/reservation.component';
-import { LoginComponent } from './login/login.component'; // a plugin!
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
-  interactionPlugin
+  interactionPlugin,
+  timeGridPlugin,
+  listPlugin
 ]);
 
 @NgModule({
@@ -28,7 +33,8 @@ FullCalendarModule.registerPlugins([
     ClientComponent,
     HotelComponent,
     ReservationComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

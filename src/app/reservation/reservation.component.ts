@@ -27,6 +27,11 @@ export class ReservationComponent implements OnInit {
   @ViewChild('deletereservation') deletereservation : ElementRef | undefined
 
   calendarOptions : CalendarOptions = {
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
     initialView : "dayGridMonth",
     eventClick: this.showModalOptionsCalendar.bind(this)
 
