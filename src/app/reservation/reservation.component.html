@@ -42,17 +42,18 @@
         <div class="modal-body">
           <form (submit)="submit()">
             <div class="mb-3">
-              <label for="dateDebut" class="form-label">Numéro de chambre</label>
+              <label for="dateDebut" class="form-label">Date début</label>
               <input type="datetime-local" class="form-control" name="dateDebut" id="dateDebut" aria-describedby="dateDebut" placeholder="Votre date d'arrivé" [(ngModel)]="reservation.dateDebut">
             </div>
             <div class="mb-3">
-              <label for="dateFin" class="form-label">Numéro de chambre</label>
+              <label for="dateFin" class="form-label">date fine</label>
               <input type="datetime-local" class="form-control" name="dateFin" id="dateFin" aria-describedby="dateFin" placeholder="Votre date de départ" [(ngModel)]="reservation.dateFin">
             </div>
             <div class="mb-3">
               <label for="numeroChambre" class="form-label">Numéro de chambre</label>
               <input type="number" class="form-control" name="numeroChambre" id="numeroChambre" aria-describedby="numeroChambre" placeholder="Votre numéro de chambre" [(ngModel)]="reservation.numeroChambre">
             </div>
+            <div *ngIf="erreur != undefined"  class="alert alert-danger" role="alert">{{erreur}}</div>
             <div class="mb-3">
               <label class="form-label">Client</label>
               <select name="client" class="form-select" aria-label="Client" [(ngModel)]="reservation.client">
@@ -88,16 +89,17 @@
         <div class="modal-body">
           <form (submit)="submit()">
             <div class="mb-3">
-              <label for="dateDebut" class="form-label">Numéro de chambre</label>
+              <label for="dateDebut" class="form-label">Date début</label>
               <input type="datetime-local" class="form-control" name="dateDebut" id="dateDebut" aria-describedby="dateDebut" placeholder="Votre date d'arrivé" [(ngModel)]="reservation.dateDebut">
             </div>
             <div class="mb-3">
-              <label for="dateFin" class="form-label">Numéro de chambre</label>
+              <label for="dateFin" class="form-label">Date  de fin</label>
               <input type="datetime-local" class="form-control" name="dateFin" id="dateFin" aria-describedby="dateFin" placeholder="Votre date de départ" [(ngModel)]="reservation.dateFin">
             </div>
             <div class="mb-3">
               <label for="numeroChambre" class="form-label">Numéro de chambre</label>
               <input type="number" class="form-control" name="numeroChambre" id="numeroChambre" aria-describedby="numeroChambre" placeholder="Votre numéro de chambre" [(ngModel)]="reservation.numeroChambre">
+              <div *ngIf="erreur != undefined"  class="alert alert-danger" role="alert">{{erreur}}</div>
             </div>
             <div class="mb-3">
               <label class="form-label">Client</label>

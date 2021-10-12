@@ -14,7 +14,7 @@ import { ReservationService } from '../service/reservation.service';
   styleUrls: ['./reservation.component.css']
 })
 export class ReservationComponent implements OnInit {
-
+  erreur : any;
   success : boolean = false;
   error : boolean = false;
   showModal: boolean = false;
@@ -127,6 +127,7 @@ export class ReservationComponent implements OnInit {
           console.log(erreur);
           this.error = true;
           this.success = false;
+          this.erreur = erreur.error.message;
         }
       )
     }
@@ -140,7 +141,7 @@ export class ReservationComponent implements OnInit {
           this.reservation = new Reservation();
         },
         erreur => {
-          console.log(erreur)
+          this.erreur = erreur.error.message;
           this.error = true;
           this.success = false;
         }
